@@ -1,0 +1,22 @@
+{
+  "name": "Anish Dixit",
+  "title": "GenAI Developer",
+  "bio": "Hi, I'm Anish. I'm a Mathematics and Computing graduate from IIT BHU, passionate about GenAI and software development. From building advanced RAG chatbots to developing full-stack platforms with Go and React, I love solving hard problems and building robust, scalable AI infrastructure.",
+  "socials": [
+    {
+      "platform": "github",
+      "url": "https://github.com/AnishDikxit",
+      "icon": "Github"
+    },
+    {
+      "platform": "linkedin",
+      "url": "https://www.linkedin.com/in/anish-dixit-7785a4201/",
+      "icon": "Linkedin"
+    },
+    {
+      "platform": "email",
+      "url": "mailto:anish.22053@gmail.com",
+      "icon": "Mail"
+    }
+  ]
+}

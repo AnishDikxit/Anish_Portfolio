@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Python",
+    "category": "backend",
+    "proficiency": 95
+  },
+  {
+    "name": "Go",
+    "category": "backend",
+    "proficiency": 90
+  },
+  {
+    "name": "React",
+    "category": "frontend",
+    "proficiency": 85
+  },
+  {
+    "name": "TypeScript",
+    "category": "frontend",
+    "proficiency": 85
+  },
+  {
+    "name": "LangChain",
+    "category": "genai",
+    "proficiency": 90
+  },
+  {
+    "name": "LLMs & RAG",
+    "category": "genai",
+    "proficiency": 95
+  },
+  {
+    "name": "Docker",
+    "category": "tools",
+    "proficiency": 80
+  },
+  {
+    "name": "Kubernetes",
+    "category": "tools",
+    "proficiency": 75
+  }
+]

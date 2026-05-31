@@ -1,0 +1,41 @@
+[
+  {
+    "id": "1",
+    "role": "Teaching Assistant - IT and Computing Workshop",
+    "company": "IIT (BHU)",
+    "period": "Jan 2026 - Present",
+    "description": "Mentoring 64 undergraduate students in Object-Oriented Programming and application development using Java and Python.",
+    "technologies": ["Java", "Python", "OOP"],
+    "highlights": [
+      "Mentored 64 students in Object-Oriented Programming and application development.",
+      "Guided students through scientific computing tasks and GUI application development.",
+      "Provided code reviews to improve student code quality and maintainability."
+    ]
+  },
+  {
+    "id": "2",
+    "role": "Software Development Intern",
+    "company": "Pattern Technologies",
+    "period": "May 2025 - Jul 2025",
+    "description": "Developed and optimized frontend features using React, TypeScript, and Storybook.",
+    "technologies": ["React", "TypeScript", "Storybook", "Vitest", "Vite"],
+    "highlights": [
+      "Migrated a legacy JavaScript component library to TypeScript on React/Storybook.",
+      "Integrated Sandpack within Storybook, achieving a 90% reduction in load time.",
+      "Built a proof of concept with Tanstack Router; awarded a Pre-Placement Offer (PPO)."
+    ]
+  },
+  {
+    "id": "3",
+    "role": "Software Development Intern",
+    "company": "MDAY Consultancy",
+    "period": "May 2024 - Jul 2024",
+    "description": "Leveraged HTML5, CSS (Flexbox/Grid), and ES6+ JavaScript alongside ReactJS components.",
+    "technologies": ["ReactJS", "HTML5", "CSS", "JavaScript", "MySQL"],
+    "highlights": [
+      "Increased user engagement by 15% by building a highly interactive website.",
+      "Achieved a 10% increase in mobile traffic by implementing responsive design principles.",
+      "Worked with MySQL to manage and query application data for backend integration."
+    ]
+  }
+]

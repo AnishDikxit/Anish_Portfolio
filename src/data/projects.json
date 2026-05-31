@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "title": "RAG Chatbot over YouTube Transcript Corpus",
+    "description": "End-to-end RAG system as a 5-stage pipeline serving grounded multi-turn Q&A with inline source/timestamp citations at <4s p95 latency.",
+    "image": "/projects/rag_chatbot.png",
+    "tags": ["Python", "LangChain", "FAISS", "Anthropic Claude", "Ragas"],
+    "category": "genai",
+    "urls": {
+      "github": "https://github.com/AnishDikxit/RAG_Chatbot"
+    },
+    "featured": true
+  },
+  {
+    "id": "2",
+    "title": "MCP Agentic CLI Interface",
+    "description": "Local client-server communication layer using Model Context Protocol to securely expose tools to Anthropic API.",
+    "image": "/projects/mcp_agentic.png",
+    "tags": ["Python", "Model Context Protocol", "Anthropic API"],
+    "category": "genai",
+    "urls": {
+      "github": "https://github.com/AnishDikxit/AnishDikxit"
+    },
+    "featured": true
+  },
+  {
+    "id": "3",
+    "title": "EdVenture - AI Gamified Learning Platform",
+    "description": "AI-driven learning engine on Go+MongoDB backend integrating Gemini API for personalized content and WebSocket multiplayer.",
+    "image": "/projects/edventure.png",
+    "tags": ["Go", "React.js", "Gemini API", "WebSockets", "MongoDB"],
+    "category": "fullstack",
+    "urls": {
+      "github": "https://github.com/AnishDikxit/AnishDikxit"
+    },
+    "featured": true
+  },
+  {
+    "id": "4",
+    "title": "Asynchronous Actor-Critic Architectures",
+    "description": "PPO actor-critic with recurrent LSTM core from scratch in PyTorch for Delta-Neutral Hedging.",
+    "image": "/projects/actor_critic.png",
+    "tags": ["PyTorch", "C++17", "PPO", "LSTM", "Multiprocessing"],
+    "category": "genai",
+    "urls": {
+      "github": "https://github.com/AnishDikxit/async-deep-hedging"
+    },
+    "featured": false
+  },
+  {
+    "id": "5",
+    "title": "Toy Redis",
+    "description": "Spec-compliant Key-Value server in C++ implementing the RESP protocol and concurrent TCP socket connections.",
+    "image": "/projects/toy_redis.png",
+    "tags": ["C++", "TCP/IP", "Concurrency"],
+    "category": "backend",
+    "urls": {
+      "github": "https://github.com/AnishDikxit/codecrafters-redis-cpp"
+    },
+    "featured": false
+  }
+]
