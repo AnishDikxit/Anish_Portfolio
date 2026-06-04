@@ -8,6 +8,7 @@ import { ExperienceTimeline } from './components/experience/ExperienceTimeline';
 import { ProjectsGrid } from './components/projects/ProjectsGrid';
 import { SkillsSection } from './components/skills/SkillsSection';
 import { Contact } from './components/contact/Contact';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   // Initialize Lenis for buttery-smooth scrolling
@@ -44,8 +45,8 @@ function App() {
         <SkillsSection />
         <Contact />
       </main>
-
       <Footer />
+      <Analytics />
     </div>
   );
 }
