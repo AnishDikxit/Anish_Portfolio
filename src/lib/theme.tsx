@@ -7,29 +7,42 @@ type ThemeContextValue = {
   toggle: () => void;
 };
 
+const STORAGE_KEY = 'theme';
+const DEFAULT_THEME: Theme = 'dark';
+
 const ThemeContext = createContext<ThemeContextValue | null>(null);
+
+function readStoredTheme(): Theme {
+  if (typeof window === 'undefined') return DEFAULT_THEME;
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    return stored === 'light' || stored === 'dark' ? stored : DEFAULT_THEME;
+  } catch {
+    return DEFAULT_THEME;
+  }
+}
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
   root.classList.toggle('dark', theme === 'dark');
-  root.classList.toggle('light', theme === 'light');
   root.style.colorScheme = theme;
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>(readStoredTheme);
 
   useEffect(() => {
-    const stored = localStorage.getItem('theme');
-    const next: Theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
-    setTheme(next);
-    applyTheme(next);
-  }, []);
+    applyTheme(theme);
+  }, [theme]);
 
   const toggle = () => {
     setTheme((current) => {
       const next = current === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('theme', next);
+      try {
+        window.localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        // private mode can block storage
+      }
       applyTheme(next);
       return next;
     });

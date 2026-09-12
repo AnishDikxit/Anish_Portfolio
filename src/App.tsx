@@ -22,7 +22,7 @@ function App() {
   return (
     <ThemeProvider>
       <div className="min-h-[100dvh] bg-void font-sans text-ink">
-        <div className="grain" aria-hidden="true" />
+        <div className="grain" aria-hidden="true" style={{ zIndex: zIndex.grain }} />
         <Navbar />
         <main>
           <Hero />

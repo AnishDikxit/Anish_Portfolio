@@ -9,6 +9,7 @@ import {
   type Transition,
 } from "motion/react";
 import { cn } from "@/lib/utils";
+import githubRepos from "@/data/github-repos.json";
 
 export type ContributionLevel = 0 | 1 | 2 | 3 | 4;
 
@@ -20,7 +21,7 @@ export type Contribution = {
 
 export type RepoContribution = {
   name: string;
-  count: number;
+  count?: number;
   logo?: React.ReactNode;
   href?: string;
 };
@@ -114,14 +115,8 @@ function describeDay({ count, date }: Contribution) {
 }
 
 const CALENDAR_API = "https://github-contributions-api.jogruber.de/v4";
-const EVENTS_API = "https://api.github.com/users";
 
 type ApiDay = { date: string; count: number; level: number };
-type PushEvent = {
-  type: string;
-  repo?: { name: string };
-  payload?: { commits?: unknown[] };
-};
 
 async function fetchCalendar(login: string) {
   const res = await fetch(`${CALENDAR_API}/${login}?y=last`);
@@ -142,51 +137,16 @@ async function fetchCalendar(login: string) {
   }));
 }
 
-async function fetchRepos(login: string): Promise<RepoContribution[]> {
-  const res = await fetch(`${EVENTS_API}/${login}/events/public?per_page=100`);
-  if (!res.ok) return [];
-
-  const events: PushEvent[] = await res.json();
-  const counts = new Map<string, number>();
-
-  for (const event of events) {
-    if (event.type !== "PushEvent" || !event.repo) continue;
-    const commits = event.payload?.commits?.length ?? 1;
-    counts.set(event.repo.name, (counts.get(event.repo.name) ?? 0) + commits);
-  }
-
-  return [...counts.entries()]
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, STACK_LIMIT)
-    .map(([fullName, count]) => {
-      const [owner, name] = fullName.split("/");
-      return {
-        name,
-        count,
-        href: `https://github.com/${fullName}`,
-        // github has no repo logo, only an owner avatar, so own repos use the initial
-        logo:
-          owner.toLowerCase() === login.toLowerCase() ? undefined : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={`https://github.com/${owner}.png?size=64`} alt="" />
-          ),
-      };
-    });
-}
-
-function useGitHubUser(login?: string) {
-  const [data, setData] = React.useState<{
-    contributions: Contribution[];
-    repos: RepoContribution[];
-  }>();
+function useGitHubCalendar(login?: string) {
+  const [data, setData] = React.useState<Contribution[]>();
 
   React.useEffect(() => {
     if (!login) return;
     let active = true;
 
-    Promise.all([fetchCalendar(login), fetchRepos(login)])
-      .then(([contributions, repos]) => {
-        if (active && contributions) setData({ contributions, repos });
+    fetchCalendar(login)
+      .then((contributions) => {
+        if (active && contributions) setData(contributions);
       })
       .catch(() => {});
 
@@ -357,7 +317,7 @@ const ContributionGrid = ({
               style={{ width: cellSize }}
             >
               {month && (
-                <span className="absolute left-0 top-0 text-[10px] leading-none text-foreground/40">
+                <span className="absolute left-0 top-0 text-[10px] leading-none text-[#0c0c0c]/40">
                   {month}
                 </span>
               )}
@@ -424,7 +384,7 @@ const Avatar = ({
     layoutId={layoutId}
     transition={transition}
     className={cn(
-      "grid size-7 shrink-0 place-items-center overflow-hidden rounded-full bg-neutral-200 text-[11px] font-medium uppercase text-foreground/70 ring-2 ring-background dark:bg-neutral-800",
+      "grid size-7 shrink-0 place-items-center overflow-hidden rounded-full bg-neutral-200 text-[11px] font-medium uppercase text-neutral-600 ring-2 ring-white",
       "[&_img]:size-full [&_img]:object-cover [&_svg]:size-full",
       className,
     )}
@@ -443,17 +403,19 @@ const RepoRow = ({
   transition: Transition;
 }) => {
   const className =
-    "flex items-center gap-3 rounded-xl mx-2 px-2 py-2 transition-colors hover:bg-foreground/5";
+    "flex items-center gap-3 rounded-xl mx-2 px-2 py-2 transition-colors hover:bg-black/5";
 
   const content = (
     <>
       <Avatar repo={repo} layoutId={layoutId} transition={transition} />
-      <span className="flex-1 truncate text-sm text-foreground">
+      <span className="flex-1 truncate text-sm text-[#0c0c0c]">
         {repo.name}
       </span>
-      <span className="text-sm tabular-nums text-foreground/70">
-        {repo.count}
-      </span>
+      {repo.count != null && (
+        <span className="text-sm tabular-nums text-[#0c0c0c]/70">
+          {repo.count}
+        </span>
+      )}
     </>
   );
 
@@ -481,7 +443,7 @@ const Chevron = ({
     strokeLinecap="round"
     strokeLinejoin="round"
     aria-hidden
-    className="size-7 text-[#C4C9CC] dark:text-[#3E4346]"
+    className="size-7 text-[#C4C9CC]"
     initial={false}
     animate={{ rotate: open ? 180 : 0 }}
     transition={transition}
@@ -533,8 +495,9 @@ const GitHubActivity = ({
     onOpenChange?.(!open);
   };
 
-  const needsFetch = !contributionsProp.length || !reposProp.length;
-  const fetched = useGitHubUser(needsFetch ? username : undefined);
+  const fetched = useGitHubCalendar(
+    contributionsProp.length ? undefined : username,
+  );
   const placeholder = React.useMemo(
     () => (username ? emptyDays(weeksFor(months)) : []),
     [username, months],
@@ -542,8 +505,8 @@ const GitHubActivity = ({
 
   const contributions = contributionsProp.length
     ? contributionsProp
-    : (fetched?.contributions ?? placeholder);
-  const repos = reposProp.length ? reposProp : (fetched?.repos ?? []);
+    : (fetched ?? placeholder);
+  const repos = reposProp.length ? reposProp : githubRepos;
 
   const scale = React.useMemo(() => toScale(accent), [accent]);
   const transition = reduceMotion ? { duration: 0 } : SPRING;
@@ -608,7 +571,7 @@ const GitHubActivity = ({
           data-slot="github-activity-panel"
           data-state={open ? "open" : "closed"}
           className={cn(
-            "absolute inset-x-3 bottom-3 overflow-hidden bg-card/90 backdrop-blur-xl",
+            "absolute inset-x-3 bottom-3 overflow-hidden bg-white/90 backdrop-blur-xl",
             open && "top-3",
           )}
           style={{ borderRadius: 18 }}
@@ -619,7 +582,7 @@ const GitHubActivity = ({
             transition={headerTransition}
             className="flex items-center justify-between gap-3 py-3 px-4"
           >
-            <span className="truncate text-sm text-foreground">{label}</span>
+            <span className="truncate text-sm text-[#0c0c0c]">{label}</span>
 
             <div className="flex items-center gap-3">
               {!open && (
@@ -644,7 +607,7 @@ const GitHubActivity = ({
                 aria-label={
                   open ? "Hide top repositories" : "Show top repositories"
                 }
-                className="grid size-7 shrink-0 place-items-center rounded-full bg-card"
+                className="grid size-7 shrink-0 place-items-center rounded-full bg-white"
               >
                 <Chevron open={open} transition={transition} />
               </button>
