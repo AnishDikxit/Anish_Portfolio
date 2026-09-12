@@ -70,7 +70,7 @@ export function TimelineCard({ experience, isLeft, index }: TimelineCardProps) {
             {experience.technologies && experience.technologies.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-glass-border">
                 {experience.technologies.map(tech => (
-                  <Badge key={tech} variant="outline">
+                  <Badge key={tech}>
                     {tech}
                   </Badge>
                 ))}
