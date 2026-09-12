@@ -17,6 +17,7 @@ export function ProjectFilter({ categories, activeCategory, onCategoryChange }: 
           <button
             key={category.value}
             type="button"
+            aria-pressed={isActive}
             onClick={() => onCategoryChange(category.value)}
             className={cn(
               'text-[14px] font-medium tracking-[0.35px] uppercase transition-colors',

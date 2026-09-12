@@ -189,11 +189,24 @@ function useWheel(
           ? at - mod(at - digit, 10)
           : at + mod(digit - at, 10);
     }
-    const roll = animate(pos, goal.current, spring(duration));
+    const roll = animate(pos, goal.current, {
+      ...spring(duration),
+      onComplete: () => {
+        const base = mod(goal.current, 10);
+        if (goal.current !== base) {
+          goal.current = base;
+          pos.set(base);
+        }
+      },
+    });
     return () => roll.stop();
   }, [digit, duration, reduced, pos]);
 
-  return useTransform(pos, (p) => `${(-mod(p, 10) * 100) / WHEEL.length}%`);
+  return useTransform(
+    pos,
+    (p) =>
+      `${(-(p > 10 ? 10 : p < 0 ? mod(p, 10) : p) * 100) / WHEEL.length}%`,
+  );
 }
 
 type SlotProps = {

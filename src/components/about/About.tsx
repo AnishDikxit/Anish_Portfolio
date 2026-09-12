@@ -1,5 +1,5 @@
 import { useInView } from 'motion/react';
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { Section } from '../layout/Section';
 import { Still } from '../ui/Still';
 import { AnimatedCounter } from '../ui/animated-counter';
@@ -33,10 +33,14 @@ export function About() {
               <span className="text-signal">GenAI</span> Developer
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted md:text-lg">
-              Hi, I&apos;m Anish. I&apos;m a Mathematics and Computing graduate from IIT BHU, passionate
-              about <span className="text-signal">GenAI</span> and software development. From building
-              advanced RAG chatbots to developing full-stack platforms with Go and React, I love solving
-              hard problems and building robust, scalable AI infrastructure.
+              {profileData.bio.split('GenAI').map((part, index, parts) => (
+                <Fragment key={index}>
+                  {part}
+                  {index < parts.length - 1 && (
+                    <span className="text-signal">GenAI</span>
+                  )}
+                </Fragment>
+              ))}
             </p>
           </div>
 

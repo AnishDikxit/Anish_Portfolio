@@ -4,7 +4,7 @@ import type { Skill } from '../../types';
 
 export function SkillsSection() {
   const names = (skillsData as Skill[]).map((skill) => skill.name);
-  const track = [...names, ...names, ...names];
+  const track = [...names, ...names];
 
   return (
     <Section id="skills" title="Tools">

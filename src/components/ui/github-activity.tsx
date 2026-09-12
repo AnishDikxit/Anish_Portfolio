@@ -457,7 +457,6 @@ export type GitHubActivityProps = React.ComponentProps<"div"> & {
   username?: string;
   contributions?: Contribution[];
   repos?: RepoContribution[];
-  year?: number;
   accent?: string | string[];
   cellSize?: number;
   months?: number;
@@ -473,7 +472,6 @@ const GitHubActivity = ({
   username,
   contributions: contributionsProp = [],
   repos: reposProp = [],
-  year,
   accent = DEFAULT_ACCENT,
   cellSize = DEFAULT_CELL_SIZE,
   months = DEFAULT_MONTHS,
@@ -526,7 +524,7 @@ const GitHubActivity = ({
   );
 
   const parsedYear = Number(contributions.at(-1)?.date.slice(0, 4));
-  const displayYear = year ?? (Number.isFinite(parsedYear) ? parsedYear : null);
+  const displayYear = Number.isFinite(parsedYear) ? parsedYear : null;
   const heading = `${total} contributions${displayYear ? ` in ${displayYear}` : ""}`;
 
   const gap = gapFor(cellSize);
