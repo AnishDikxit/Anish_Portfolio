@@ -4,21 +4,13 @@ import { cn } from '../../lib/utils';
 interface BadgeProps {
   children: React.ReactNode;
   className?: string;
-  variant?: 'default' | 'outline' | 'glow';
 }
 
-export function Badge({ children, className, variant = 'default' }: BadgeProps) {
-  const variants = {
-    default: "bg-tertiary text-text-secondary",
-    outline: "border border-glass-border bg-transparent text-text-primary",
-    glow: "border border-accent-purple/50 bg-accent-purple/10 text-accent-purple shadow-[0_0_10px_rgba(139,92,246,0.2)]"
-  };
-
+export function Badge({ children, className }: BadgeProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-3 py-1 text-xs font-mono font-medium",
-        variants[variant],
+        'inline-flex items-center rounded-[4px] border border-line px-2.5 py-1 text-[11px] font-medium tracking-[0.35px] text-muted uppercase',
         className
       )}
     >

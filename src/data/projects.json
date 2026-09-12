@@ -3,7 +3,7 @@
     "id": "1",
     "title": "RAG Chatbot over YouTube Transcript Corpus",
     "description": "End-to-end RAG system as a 5-stage pipeline serving grounded multi-turn Q&A with inline source/timestamp citations at <4s p95 latency.",
-    "image": "/projects/rag_chatbot.png",
+    "image": "/stills/project-rag.png?v=3",
     "tags": ["Python", "LangChain", "FAISS", "Anthropic Claude", "Ragas"],
     "category": "genai",
     "urls": {
@@ -15,7 +15,7 @@
     "id": "2",
     "title": "MCP Agentic CLI Interface",
     "description": "Local client-server communication layer using Model Context Protocol to securely expose tools to Anthropic API.",
-    "image": "/projects/mcp_agentic.png",
+    "image": "/stills/project-mcp.png?v=3",
     "tags": ["Python", "Model Context Protocol", "Anthropic API"],
     "category": "genai",
     "urls": {
@@ -27,7 +27,7 @@
     "id": "3",
     "title": "EdVenture - AI Gamified Learning Platform",
     "description": "AI-driven learning engine on Go+MongoDB backend integrating Gemini API for personalized content and WebSocket multiplayer.",
-    "image": "/projects/edventure.png",
+    "image": "/stills/project-edventure.png?v=3",
     "tags": ["Go", "React.js", "Gemini API", "WebSockets", "MongoDB"],
     "category": "fullstack",
     "urls": {
@@ -39,7 +39,7 @@
     "id": "4",
     "title": "Asynchronous Actor-Critic Architectures",
     "description": "PPO actor-critic with recurrent LSTM core from scratch in PyTorch for Delta-Neutral Hedging.",
-    "image": "/projects/actor_critic.png",
+    "image": "/stills/project-hedging.png?v=3",
     "tags": ["PyTorch", "C++17", "PPO", "LSTM", "Multiprocessing"],
     "category": "genai",
     "urls": {
@@ -51,7 +51,7 @@
     "id": "5",
     "title": "Toy Redis",
     "description": "Spec-compliant Key-Value server in C++ implementing the RESP protocol and concurrent TCP socket connections.",
-    "image": "/projects/toy_redis.png",
+    "image": "/stills/project-redis.png?v=3",
     "tags": ["C++", "TCP/IP", "Concurrency"],
     "category": "backend",
     "urls": {

@@ -1,43 +1,23 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 import { AnimatedSection } from '../ui/AnimatedSection';
-import { GradientText } from '../ui/GradientText';
-import { cn } from '../../lib/utils';
 
 interface SectionProps {
   id: string;
   title?: string;
-  subtitle?: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
-  contentClassName?: string;
 }
 
-export function Section({ id, title, subtitle, children, className, contentClassName }: SectionProps) {
+export function Section({ id, title, children, className }: SectionProps) {
   return (
-    <AnimatedSection id={id} className={cn("relative", className)}>
-      <div className="max-w-7xl mx-auto px-6">
-        {(title || subtitle) && (
-          <div className="mb-12 md:mb-20">
-            {title && (
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-                <GradientText>{title}</GradientText>
-              </h2>
-            )}
-            {subtitle && (
-              <p className="text-text-secondary text-lg md:text-xl max-w-2xl">
-                {subtitle}
-              </p>
-            )}
-            
-            {title && (
-              <div className="h-1 w-20 bg-gradient-to-r from-accent-purple to-accent-cyan mt-6 rounded-full" />
-            )}
-          </div>
+    <AnimatedSection id={id} className={className}>
+      <div className="mx-auto w-full max-w-[1600px] px-4 md:px-8">
+        {title && (
+          <h2 className="mb-10 max-w-[18ch] text-[2.5rem] leading-none font-normal tracking-[-1px] text-ink md:mb-14">
+            {title}
+          </h2>
         )}
-        
-        <div className={cn("", contentClassName)}>
-          {children}
-        </div>
+        {children}
       </div>
     </AnimatedSection>
   );
